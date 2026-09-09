@@ -25,7 +25,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.http.MediaType;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
@@ -54,23 +54,23 @@ class EventControllerTest {
     private static final String DEFAULT_ENVIRONMENT = "test";
     private static final String TOKEN = "I'm a token";
 
-    @MockBean
+    @MockitoBean
     PublisherService publisherService;
-    @MockBean
+    @MockitoBean
     StarlightConfig starlightConfig;
-    @MockBean
+    @MockitoBean
     KafkaTemplate<String, String> kafkaTemplate;
-    @MockBean
+    @MockitoBean
     JwtDecoder jwtDecoder;
-    @MockBean
+    @MockitoBean
     SchemaValidationService schemaValidationService;
-    @MockBean
+    @MockitoBean
     TokenService tokenService;
-    @MockBean
+    @MockitoBean
     HorizonTracer tracer;
-    @MockBean
+    @MockitoBean
     RestResponseEntityExceptionHandler restResponseEntityExceptionHandler;
-    @MockBean
+    @MockitoBean
     RedisReportingService redisReportingService;
 
     @Autowired

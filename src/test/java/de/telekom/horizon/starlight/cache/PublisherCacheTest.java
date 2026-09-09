@@ -12,7 +12,7 @@ import de.telekom.horizon.starlight.config.StarlightConfig;
 import de.telekom.horizon.starlight.exception.SubscriptionMalformedException;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -24,9 +24,9 @@ class PublisherCacheTest {
     private static final String DEFAULT_ENVIRONMENT = "test";
     private static final String EVENT_TYPE = "pandora.horizon.starlight.test.caas.v1";
 
-    @MockBean
+    @MockitoBean
     JsonCacheService<SubscriptionResource> subscriptionCache;
-    @MockBean
+    @MockitoBean
     StarlightConfig starlightConfig;
 
     @Test
