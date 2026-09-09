@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.kafka.test.EmbeddedKafkaBroker;
 import org.springframework.test.context.DynamicPropertyRegistry;
@@ -32,7 +32,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @Testcontainers
 class RedisReportingServiceTest {
 
-    @MockBean
+    @MockitoBean
     JsonCacheService<SubscriptionResource> subscriptionCache;
 
     public static final GenericContainer<?> redisContainer;
