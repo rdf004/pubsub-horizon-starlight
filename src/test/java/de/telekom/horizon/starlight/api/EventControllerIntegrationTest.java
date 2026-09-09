@@ -21,8 +21,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.mock.mockito.SpyBean;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 
@@ -42,19 +42,19 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(HazelcastTestInstance.class)
 class EventControllerIntegrationTest extends AbstractIntegrationTest {
 
-    @MockBean
+    @MockitoBean
     PublisherCache publisherCache;
 
-    @SpyBean
+    @MockitoSpyBean
     TokenService tokenService;
 
     @Autowired
     private ObjectMapper objectMapper;
 
-    @SpyBean
+    @MockitoSpyBean
     private ReportingService reportingService;
 
-    @SpyBean
+    @MockitoSpyBean
     private EventWriter eventWriter;
 
     private static final String DEFAULT_PUBLISHER = "eni--pandora--foobar";

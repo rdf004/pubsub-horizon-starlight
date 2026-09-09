@@ -5,8 +5,7 @@
 import org.springframework.boot.gradle.plugin.SpringBootPlugin
 
 plugins {
-    id 'org.springframework.boot' version '3.2.3'
-    id 'io.spring.dependency-management' version '1.1.4'
+    id 'org.springframework.boot' version '4.0.8'
     id 'java'
     id "jacoco"
 }
@@ -44,6 +43,7 @@ configurations {
 }
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
@@ -53,16 +53,27 @@ ext {
 }
 
 dependencies {
+    implementation platform(SpringBootPlugin.BOM_COORDINATES)
+    annotationProcessor platform(SpringBootPlugin.BOM_COORDINATES)
+    testAnnotationProcessor platform(SpringBootPlugin.BOM_COORDINATES)
+
     // Spring
     implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation(
+        'org.springframework.boot:spring-boot-starter-oauth2-resource-server')
+    implementation 'org.springframework.boot:spring-boot-starter-webmvc'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-    implementation 'org.springframework.kafka:spring-kafka'
+    implementation 'org.springframework.boot:spring-boot-starter-kafka'
+    // exposes Boot 4 MongoAutoConfiguration (excluded in StarlightApplication)
+    implementation 'org.springframework.boot:spring-boot-mongodb'
     testImplementation 'org.springframework.boot:spring-boot-starter-webflux'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation(
+        'org.springframework.boot:spring-boot-starter-webmvc-test')
+    testImplementation(
+        'org.springframework.boot:spring-boot-starter-security-test')
     testImplementation 'org.springframework.kafka:spring-kafka-test'
     testImplementation 'org.springframework.security:spring-security-test'
 
@@ -71,6 +82,8 @@ dependencies {
 
     // 3rd party
     implementation 'com.fasterxml.jackson.core:jackson-databind'
+    // Boot 4 autoconfigures Jackson 3 only; keep a Jackson 2 ObjectMapper
+    implementation 'org.springframework.boot:spring-boot-jackson2'
     implementation ("com.github.erosb:everit-json-schema:${everitJsonVersion}") {
         // fixes logging in test scope
         exclude group: 'commons-logging'
@@ -90,13 +103,7 @@ dependencies {
     }
 
     testImplementation 'org.springframework.boot:spring-boot-testcontainers'
-    testImplementation 'org.testcontainers:junit-jupiter'
-}
-
-dependencyManagement {
-    imports {
-        mavenBom SpringBootPlugin.BOM_COORDINATES
-    }
+    testImplementation 'org.testcontainers:testcontainers-junit-jupiter'
 }
 
 java {

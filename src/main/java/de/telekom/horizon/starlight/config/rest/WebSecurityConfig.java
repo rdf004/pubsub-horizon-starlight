@@ -8,7 +8,7 @@ import io.micrometer.observation.ObservationPredicate;
 import io.micrometer.observation.ObservationRegistry;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.actuate.autoconfigure.observation.ObservationRegistryCustomizer;
+import org.springframework.boot.micrometer.observation.autoconfigure.ObservationRegistryCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -21,7 +21,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import java.util.List;
 
-import static org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest.toAnyEndpoint;
+import static org.springframework.boot.security.autoconfigure.actuate.web.servlet.EndpointRequest.toAnyEndpoint;
 
 @EnableWebSecurity
 @Configuration
