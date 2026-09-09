@@ -6,15 +6,17 @@ package de.telekom.horizon.starlight;
 
 import de.telekom.eni.pandora.horizon.mongo.config.MongoProperties;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.actuate.autoconfigure.metrics.cache.CacheMetricsAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
-import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
+import org.springframework.boot.data.redis.autoconfigure.DataRedisAutoConfiguration;
+import org.springframework.boot.mongodb.autoconfigure.MongoAutoConfiguration;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-@SpringBootApplication(exclude = {CacheMetricsAutoConfiguration.class, MongoAutoConfiguration.class, RedisAutoConfiguration.class})
+@SpringBootApplication(exclude = {
+        MongoAutoConfiguration.class,
+        DataRedisAutoConfiguration.class
+})
 //@EnableConfigurationProperties({RedisReportConfig.class})
 @EnableConfigurationProperties({MongoProperties.class})
 @ConfigurationPropertiesScan("de.telekom.horizon.starlight.config")

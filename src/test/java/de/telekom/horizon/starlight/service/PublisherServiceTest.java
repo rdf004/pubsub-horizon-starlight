@@ -33,12 +33,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.mock.mockito.SpyBean;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
@@ -68,29 +67,29 @@ class PublisherServiceTest {
     private static final String DEFAULT_PUBLISHER_ID = TokenServiceMockImpl.MOCKED_PUBLISHER_ID;
     private static final String DEFAULT_TOPIC = "published";
 
-    @MockBean(name = "kafkaTemplate")
+    @MockitoBean(name = "kafkaTemplate")
     KafkaTemplate<String, String> kafkaTemplate;
-    @MockBean
+    @MockitoBean
     PublisherCache publisherCache;
-    @MockBean
+    @MockitoBean
     StarlightConfig starlightConfig;
-    @MockBean
+    @MockitoBean
     TenantConfiguration tenantConfig;
-    @MockBean
+    @MockitoBean
     SchemaValidationService schemaValidationService;
-    @MockBean
+    @MockitoBean
     HorizonTracer tracer;
-    @Mock
-    ScopedDebugSpanWrapper scopedDebugSpanWrapper;
-    @MockBean
+    ScopedDebugSpanWrapper scopedDebugSpanWrapper =
+            mock(ScopedDebugSpanWrapper.class);
+    @MockitoBean
     HorizonMetricsHelper metricsHelper;
-    @MockBean
+    @MockitoBean
     SpectreDirectPublishService spectreDirectPublishService;
     @Autowired
     PublisherService publisherService;
     @Autowired
     KafkaProperties kafkaProperties;
-    @SpyBean
+    @MockitoSpyBean
     Validator validator;
 
     @Test

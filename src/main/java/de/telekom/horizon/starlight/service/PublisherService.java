@@ -22,8 +22,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.kafka.common.errors.RecordTooLargeException;
-import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
 import java.time.Instant;
@@ -223,7 +223,7 @@ public class PublisherService {
      * consists of a header name and a list of header values.
      */
     private Map<String, List<String>> filterHttpHeaders(MultiValueMap<String, String> httpHeaders) {
-        var filteredHeaders = new HttpHeaders();
+        var filteredHeaders = new LinkedMultiValueMap<String, String>();
 
         if (httpHeaders != null) {
             httpHeaders.forEach((k, v) -> {
